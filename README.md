@@ -7,9 +7,9 @@
 - 更新日期: 20220408
 - 数据日期: 20220407
 
-- [累计动画](https://qhduan.github.io/sh-cov/?map=accumulate)
-- [单日动画](https://qhduan.github.io/sh-cov/?map=single)
-- [20220407](https://qhduan.github.io/sh-cov/?map=20220407)
-- [20220406](https://qhduan.github.io/sh-cov/?map=20220406)
-- [20220405](https://qhduan.github.io/sh-cov/?map=20220405)
+- [累计连续动画](https://qhduan.github.io/sh-cov/?map=accumulate)
+- [单日连续动画](https://qhduan.github.io/sh-cov/?map=single)
+- [单日20220407](https://qhduan.github.io/sh-cov/?map=20220407)
+- [单日20220406](https://qhduan.github.io/sh-cov/?map=20220406)
+- [单日20220405](https://qhduan.github.io/sh-cov/?map=20220405)
 - ...以此类推
