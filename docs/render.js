@@ -3,12 +3,19 @@ const chartDom = document.getElementById('main')
 const myChart = echarts.init(chartDom)
 
 
-async function render(data) {
+async function render(data, title) {
 
     const option = {
         title: {
-            text: '上海',
-            left: 'center'
+            text: title || '上海',
+            left: 'center',
+            textStyle: {
+                fontSize: 36,
+                fontWeight: 'bold',
+                color: '#fff',
+                textBorderColor: '#000',
+                textBorderWidth: 8,
+            }
         },
         tooltip: {
             trigger: 'item'
@@ -164,10 +171,10 @@ async function render(data) {
 
 }
 
-async function drawSingle(url) {
+async function drawSingle(url, title) {
     const res = await fetch(url)
     const data = await res.json()
-    await render(data)
+    await render(data, title)
 }
 
 async function main() {
@@ -185,7 +192,7 @@ async function main() {
         }
     }
     console.log('mode normal')
-    await drawSingle(url)
+    await drawSingle(url, '上海 单日 ' + url.substring(4, 12))
 }
 
 function sleep(ms) {
@@ -204,10 +211,10 @@ async function change(accumulate) {
         // '20220303.json',
         // '20220304.json',
         // '20220305.json',
-        // '20220306.json',
-        // '20220307.json',
-        // '20220308.json',
-        // '20220309.json',
+        '20220306.json',
+        '20220307.json',
+        '20220308.json',
+        '20220309.json',
         '20220310.json',
         '20220311.json',
         '20220312.json',
@@ -246,7 +253,7 @@ async function change(accumulate) {
             const res = await fetch(url)
             const data = await res.json()
             data.forEach(elem => allData[elem.name] = elem)
-            await render(Object.keys(allData).map(key => allData[key]))
+            await render(Object.keys(allData).map(key => allData[key]), `上海 累计连续 ${f.substring(0, 8)}`)
             await sleep(2000)
         }
     } else {
@@ -256,7 +263,7 @@ async function change(accumulate) {
             console.log(url)
             const res = await fetch(url)
             const data = await res.json()
-            await render(data)
+            await render(data, `上海 单日连续 ${f.substring(0, 8)}`)
             await sleep(2000)
         }
     }
