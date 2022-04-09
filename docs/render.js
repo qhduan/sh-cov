@@ -158,7 +158,7 @@ async function render(data, title) {
                 coordinateSystem: 'bmap',
                 data,
                 symbolSize: function (val) {
-                    return val[2] * 3
+                    return val[2] * 5
                 },
                 encode: {
                     value: 2
@@ -174,7 +174,7 @@ async function render(data, title) {
                     }
                 },
                 itemStyle: {
-                    color: 'rgba(255,0,0,0.2)',
+                    color: 'rgba(255,0,0,0.3)',
                 },
             },
         ]
