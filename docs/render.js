@@ -21,6 +21,7 @@ async function render(data, title) {
             trigger: 'item'
         },
         bmap: {
+            // 市中心
             center: [121.48, 31.236],
             zoom: 11,
             roam: true,
@@ -179,7 +180,7 @@ async function drawSingle(url, title) {
 
 async function main() {
     const m = document.URL.match(/map=([a-zA-Z\d]+)/)
-    let url = 'map/20220407.json'
+    
     if (m) {
         if (m[1] === 'accumulate') {
             console.log('mode accumulate')
@@ -187,16 +188,18 @@ async function main() {
         } else if (m[1] === 'single') {
             console.log('mode single')
             return await change(false)
-        } else {
-            url = `map/${m[1]}.json`
+        } else if (m[1].match(/^20\d{6}$/)) {
+            const url = `map/${m[1]}.json`
+            return await drawSingle(url, '上海 单日 ' + url.substring(4, 12))
         }
     }
-    console.log('mode normal')
-    await drawSingle(url, '上海 单日 ' + url.substring(4, 12))
-}
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
+    // 获取最新时间
+    const res = await fetch('map/latest.json')
+    const latest = (await res.json())['latest']
+    console.log('latest', latest)
+    const url = `map/${latest}.json`
+    return await drawSingle(url, '上海 单日 ' + url.substring(4, 12))
 }
 
 async function change(accumulate) {
@@ -243,7 +246,8 @@ async function change(accumulate) {
         '20220404.json',
         '20220405.json',
         '20220406.json',
-        '20220407.json'
+        '20220407.json',
+        '20220408.json',
     ]
     if (accumulate) {
         let allData = {}
@@ -254,7 +258,7 @@ async function change(accumulate) {
             const data = await res.json()
             data.forEach(elem => allData[elem.name] = elem)
             await render(Object.keys(allData).map(key => allData[key]), `上海 累计连续 ${f.substring(0, 8)}`)
-            await sleep(2000)
+            await sleep(1500)
         }
     } else {
 
@@ -264,10 +268,9 @@ async function change(accumulate) {
             const res = await fetch(url)
             const data = await res.json()
             await render(data, `上海 单日连续 ${f.substring(0, 8)}`)
-            await sleep(2000)
+            await sleep(1500)
         }
     }
 }
 
 main()
-// change()

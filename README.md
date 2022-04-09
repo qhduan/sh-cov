@@ -4,8 +4,8 @@
 
 但是不保证处理的过程绝对没错，也就是说，中间数据是可能有错的
 
-- 更新日期: 20220408
-- 数据日期: 20220407
+- 更新日期: 20220409
+- 数据日期: 20220408
 
 - [累计连续动画](https://qhduan.github.io/sh-cov/?map=accumulate)
 - [单日连续动画](https://qhduan.github.io/sh-cov/?map=single)
