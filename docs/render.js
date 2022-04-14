@@ -146,6 +146,17 @@ async function main() {
         elem.appendChild(button)
         sidebar.appendChild(elem)
     })
+    Array.from([3, 7, 14]).forEach(async (t) => {
+        const elem = document.createElement('li')
+        const button = document.createElement('button')
+        button.textContent = `最近${t}天`
+        const url = `map/${t}days.json`
+        button.addEventListener('click', async() => {
+            await drawSingle(url, `上海最近${t}天`)
+        })
+        elem.appendChild(button)
+        sidebar.appendChild(elem)
+    })
     for (let i = data.dates.length - 1; i > 0; i--) {
         const date = data.dates[i]
         const elem = document.createElement('li')
